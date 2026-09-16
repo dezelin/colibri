@@ -9,14 +9,14 @@ from pathlib import Path
 from resource_plan import GB, build_plan, discover_gpus, format_plan, memory_available
 
 
-def _check(identifier, status, summary, **details):
+def __check(identifier, status, summary, **details):
     item = {"id": identifier, "status": status, "summary": summary}
     if details:
         item["details"] = details
     return item
 
 
-def cuda_linkage(engine_path):
+def __cuda_linkage(engine_path):
     """Return CUDA linkage state without loading the executable or CUDA runtime."""
     if not Path(engine_path).is_file() or os.name != "posix":
         return {"linked": False, "missing": False}
