@@ -18,7 +18,7 @@ A 744B Mixture-of-Experts model activates only ~40B parameters per token — and
 
 - the **dense part** (attention, shared experts, embeddings — ~17B params) stays **resident in RAM at int4** (~9.9 GB);
 - the **21,504 routed experts** (75 MoE layers × 256 experts + the MTP head, ~19 MB each at int4) live **on disk** (~370 GB) and are **streamed on demand**, with a per-layer LRU cache, an optional pinned hot-store, and the OS page cache as a free L2.
-
+iuguohohuog
 The engine is a single C file (`c/glm.c`, ~2,400 lines) plus small headers. No BLAS, no Python at runtime, no GPU required (an opt-in CUDA tier for pinned experts exists — see below).
 
 ## What's implemented
